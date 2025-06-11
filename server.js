@@ -4,25 +4,16 @@ import "./env.js";
 import express from "express";
 import swagger from "swagger-ui-express";
 import cors from "cors";
-import fs from "fs";
 
 // all routers are given right here
 import productRouter from "./src/features/product/product.routes.js";
 import userRouter from "./src/features/user/user.routes.js";
 import jwtAuth from "./src/middlewares/jwt.middleware.js";
 import cartRouter from "./src/features/cartItems/cartItems.routes.js";
+import apiDocs from "./swagger.json" assert {type:'json'};
 import orderRouter from "./src/features/order/order.routes.js";
 import likeRouter from "./src/features/like/like.routes.js";
 import { connectUsingMongoose } from "./src/config/mongooseConfig.js";
-
-// readgin swagger using filesystem
-const apiDocs = fs.readFile("./swagger.json", "utf8", (err, data) => {
-  if (err) {
-    console.log("error handeling file");
-    return;
-  }
-  return data;
-});
 
 import loggerMiddleware from "./src/middlewares/logger.middleware.js";
 import { ApplicationError } from "./src/error-handler/applicationError.js";
